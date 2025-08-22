@@ -3,10 +3,10 @@ package mb.fw.suhyup.netty;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
-public class ClientHandler extends SimpleChannelInboundHandler<String> {
+public class TCPClientHandler extends SimpleChannelInboundHandler<String> {
 	private final String sendMessage;
 
-    public ClientHandler(String sendMessage) {
+    public TCPClientHandler(String sendMessage) {
         this.sendMessage = sendMessage;
     }
     
@@ -19,7 +19,6 @@ public class ClientHandler extends SimpleChannelInboundHandler<String> {
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
 		// TODO Auto-generated method stub
-		
 	}
 	
 	@Override
