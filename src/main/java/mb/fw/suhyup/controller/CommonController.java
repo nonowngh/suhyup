@@ -21,14 +21,14 @@ public class CommonController {
 
 	@PostMapping("call-suhyupbank")
     public ResponseMessage callSB(@RequestBody RequestMessage requestMessage) throws Exception {
-		log.debug("in message : {}", requestMessage);
 		
 		String requestStr = requestMessage.getData();
 		log.info("suhyupbank call data : [{}], size : {}(bytes)", requestStr, requestStr.getBytes().length);
 		
-		ResponseMessage responseMessage = new ResponseMessage();
-		responseMessage.setResultMessage(tcpClientService.sendRequest(requestStr));
-        
-		return responseMessage;
+		return ResponseMessage.builder()
+				.interfaceId(requestMessage.getInterfaceId())
+				.resultCode("200")
+				.resultMessage(tcpClientService.sendRequest(requestStr))
+				.build();
     }
 }
