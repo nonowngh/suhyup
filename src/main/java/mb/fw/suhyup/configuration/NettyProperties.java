@@ -12,4 +12,5 @@ public class NettyProperties {
 
 	private String host;
     private int port;
+    private int clientTimeoutSec;
 }

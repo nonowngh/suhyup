@@ -1,10 +1,11 @@
 server:
-  port: 8080
+  port: 28000
 
 tcp:
   suhyup-bank:
     host: 127.0.0.1
     port: 9999
+    client-timeout-sec: 10
 
 spring:
   autoconfigure:

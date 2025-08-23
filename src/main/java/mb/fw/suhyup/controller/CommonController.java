@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 import mb.fw.suhyup.dto.RequestMessage;
-import mb.fw.suhyup.netty.TCPClient;
+import mb.fw.suhyup.dto.ResponseMessage;
+import mb.fw.suhyup.netty.suhyupbank.service.TcpClientService;
 
 @RestController
 @RequestMapping("/esb/api")
@@ -16,20 +17,18 @@ import mb.fw.suhyup.netty.TCPClient;
 public class CommonController {
 	
 	@Autowired
-	TCPClient tcpClient;
+	TcpClientService tcpClientService;
 
 	@PostMapping("call-suhyupbank")
-    public String echoMessage(@RequestBody RequestMessage requestMessage) {
+    public ResponseMessage callSB(@RequestBody RequestMessage requestMessage) throws Exception {
 		log.debug("in message : {}", requestMessage);
 		
 		String requestStr = requestMessage.getData();
 		log.info("suhyupbank call data : [{}], size : {}(bytes)", requestStr, requestStr.getBytes().length);
+		
+		ResponseMessage responseMessage = new ResponseMessage();
+		responseMessage.setResultMessage(tcpClientService.sendRequest(requestStr));
         
-		try {
-			tcpClient.send(requestStr);
-		} catch (InterruptedException e) {
-			log.error("error : ", e);
-		}
-		return "Received: " + requestMessage;
+		return responseMessage;
     }
 }
