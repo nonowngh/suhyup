@@ -4,7 +4,7 @@ server:
 tcp:
   suhyup-bank:
     host: 127.0.0.1
-    port: 9999
+    port: 5555
     client-timeout-sec: 10
 
 spring:

@@ -1,5 +1,7 @@
 package mb.fw.suhyup.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,16 +21,29 @@ public class CommonController {
 	@Autowired
 	TcpClientService tcpClientService;
 
-	@PostMapping("call-suhyupbank")
-    public ResponseMessage callSB(@RequestBody RequestMessage requestMessage) throws Exception {
+	@PostMapping("call-suhyupbank-message")
+    public ResponseMessage callSBMessage(@RequestBody RequestMessage requestMessage) throws Exception {
 		
-		String requestStr = requestMessage.getData();
+		String requestStr = requestMessage.getDataString();
 		log.info("suhyupbank call data : [{}], size : {}(bytes)", requestStr, requestStr.getBytes().length);
 		
 		return ResponseMessage.builder()
 				.interfaceId(requestMessage.getInterfaceId())
 				.resultCode("200")
 				.resultMessage(tcpClientService.sendRequest(requestStr))
+				.build();
+    }
+	
+	@PostMapping("call-suhyupbank")
+    public ResponseMessage callSB(@RequestBody RequestMessage requestMessage) throws Exception {
+		
+		Map<String, Object> dataObject = requestMessage.getData();
+		log.info("suhyupbank call data : [{}]", dataObject);
+		
+		return ResponseMessage.builder()
+				.interfaceId(requestMessage.getInterfaceId())
+				.resultCode("200")
+				.resultMessage(tcpClientService.sendRequest(requestMessage.getInterfaceId(), dataObject))
 				.build();
     }
 }

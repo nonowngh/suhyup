@@ -1,5 +1,7 @@
 package mb.fw.suhyup.dto;
 
+import java.util.Map;
+
 import lombok.Data;
 
 @Data
@@ -9,6 +11,8 @@ public class RequestMessage {
 	
 	private String requestTime;
 	
-	private String data;
+	private String dataString;
+	
+	private Map<String, Object> data;
 	
 }
