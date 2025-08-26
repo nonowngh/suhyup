@@ -53,7 +53,6 @@ public class TcpClient {
 					"CAS912345678", bodyBuffer.readableBytes());
 			ByteBuf headerBuffer = tcpHeader.makeSendHeader();
 			ByteBuf sendBuffer = Unpooled.wrappedBuffer(headerBuffer, bodyBuffer);
-			
 			cf.addListener(new ChannelFutureListener() {
 				@Override
 				public void operationComplete(ChannelFuture future) throws Exception {

@@ -4,21 +4,12 @@
 		"messageId":"300002",
 		"bodyFieldList":[
 		{"name" : "업무구분", "type" : "STRING", "length" : 1},
-		{"name" : "고객명", "type" : "STRING", "length" : 50},
+		{"name" : "고객명", "type" : "INTEGER", "length" : 50},
 		{"name" : "고객번호", "type" : "STRING", "length" : 9},
 		{"name" : "실명(사업자)번호", "type" : "STRING", "length" : 13},
 		{"name" : "휴대전화번호", "type" : "STRING", "length" : 11},
-		{"name" : "자택전화번호", "type" : "STRING", "length" : 14},
-		{"name" : "우편번호", "type" : "STRING", "length" : 6},
-		{"name" : "우편번호주소", "type" : "STRING", "length" : 100},
-		{"name" : "우편번호외주소", "type" : "STRING", "length" : 100},
-		{"name" : "가입금", "type" : "STRING", "length" : 13},
-		{"name" : "출금계좌번호", "type" : "STRING", "length" : 12},
-		{"name" : "조합코드", "type" : "STRING", "length" : 3},
-		{"name" : "조합원구분코드", "type" : "STRING", "length" : 2},
-		{"name" : "sms수신여부", "type" : "STRING", "length" : 1},
-		{"name" : "관리점번호", "type" : "STRING", "length" : 4},
-		{"name" : "출자관리번호", "type" : "STRING", "length" : 20}
+		{"name" : "자택전화번호", "type" : "STRING", "length" : 14}
+
 	]},
 	{
 		"interfaceId" : "if_esb_bankapi_02",

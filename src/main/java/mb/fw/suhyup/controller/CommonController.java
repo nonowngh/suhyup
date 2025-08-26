@@ -24,26 +24,26 @@ public class CommonController {
 	@PostMapping("call-suhyupbank-message")
     public ResponseMessage callSBMessage(@RequestBody RequestMessage requestMessage) throws Exception {
 		
-		String requestStr = requestMessage.getDataString();
+		String requestStr = requestMessage.getData().toString();
 		log.info("suhyupbank call data : [{}], size : {}(bytes)", requestStr, requestStr.getBytes().length);
 		
 		return ResponseMessage.builder()
 				.interfaceId(requestMessage.getInterfaceId())
 				.resultCode("200")
-				.resultMessage(tcpClientService.sendRequest(requestStr))
+				.resultData(tcpClientService.sendRequest(requestStr))
 				.build();
     }
 	
 	@PostMapping("call-suhyupbank")
     public ResponseMessage callSB(@RequestBody RequestMessage requestMessage) throws Exception {
 		
-		Map<String, Object> dataObject = requestMessage.getData();
+		Map<String, Object> dataObject = (Map<String, Object>) requestMessage.getData();
 		log.info("suhyupbank call data : [{}]", dataObject);
 		
 		return ResponseMessage.builder()
 				.interfaceId(requestMessage.getInterfaceId())
 				.resultCode("200")
-				.resultMessage(tcpClientService.sendRequest(requestMessage.getInterfaceId(), dataObject))
+				.resultData(tcpClientService.sendRequestConvertMessage(requestMessage.getInterfaceId(), dataObject))
 				.build();
     }
 }

@@ -13,6 +13,6 @@ public class ResponseMessage {
 	
 	private String resultCode;
 	
-	private String resultMessage;
-
+	private Object resultData;
+	
 }
