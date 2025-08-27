@@ -1,7 +1,8 @@
 [
 	{
 		"interfaceId" : "if_esb_bankapi_01",
-		"messageId":"300002",
+		"messageTypeCode":"0600",
+		"transactionTypeCode":"300002",
 		"bodyFieldList":[
 		{"name" : "업무구분", "type" : "STRING", "length" : 1},
 		{"name" : "고객명", "type" : "INTEGER", "length" : 50},
@@ -13,7 +14,8 @@
 	]},
 	{
 		"interfaceId" : "if_esb_bankapi_02",
-		"messageId":"300002",
+		"messageTypeCode":"0600",
+		"transactionTypeCode":"300002",
 		"bodyFieldList":[
 		{"name" : "업무구분", "type" : "STRING", "length" : 1},
 		{"name" : "고객명", "type" : "STRING", "length" : 50},

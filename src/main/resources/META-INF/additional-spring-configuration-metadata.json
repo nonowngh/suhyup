@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "interface.spec.enable-json-file",
+  "type": "java.lang.String",
+  "description": "A description for 'interface.spec.enable-json-file'"
+}]}

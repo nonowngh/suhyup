@@ -29,8 +29,8 @@ public class CommonController {
 		
 		return ResponseMessage.builder()
 				.interfaceId(requestMessage.getInterfaceId())
-				.resultCode("200")
-				.resultData(tcpClientService.sendRequest(requestStr))
+				.resultCode("success")
+				.resultData(tcpClientService.send(requestStr))
 				.build();
     }
 	
@@ -42,8 +42,8 @@ public class CommonController {
 		
 		return ResponseMessage.builder()
 				.interfaceId(requestMessage.getInterfaceId())
-				.resultCode("200")
-				.resultData(tcpClientService.sendRequestConvertMessage(requestMessage.getInterfaceId(), dataObject))
+				.resultCode("success")
+				.resultData(tcpClientService.sendConvertMessage(requestMessage.getInterfaceId(), dataObject))
 				.build();
     }
 }

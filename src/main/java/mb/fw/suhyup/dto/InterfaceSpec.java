@@ -1,15 +1,17 @@
-package mb.fw.suhyup.converter;
+package mb.fw.suhyup.dto;
 
 import java.util.List;
 
 import lombok.Data;
 
 @Data
-public class JsonBodySpec {
+public class InterfaceSpec {
 
 	private String interfaceId;
 
-	private String messageId;
+	private String messageTypeCode;
+
+	private String transactionTypeCode;
 
 	private List<FieldSpec> bodyFieldList;
 

@@ -7,6 +7,10 @@ tcp:
     port: 5555
     client-timeout-sec: 10
 
+interface:
+  spec:
+    enable-json-file: true
+
 spring:
   autoconfigure:
     exclude:

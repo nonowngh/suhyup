@@ -32,7 +32,7 @@ public class TcpClient {
 	@Autowired(required = false)
 	NettyProperties properties;
 
-	public String sendMessage(String message) throws Exception {
+	public String sendMessage(String message, String msgTypeCode, String txTypeCode) throws Exception {
 		EventLoopGroup group = new NioEventLoopGroup();
 		Channel channel = null;
 		try {
@@ -49,7 +49,7 @@ public class TcpClient {
 			ChannelFuture cf = bootstrap.connect(properties.getHost(), properties.getPort()).sync();
 
 			ByteBuf bodyBuffer = Unpooled.copiedBuffer(message, CharsetUtil.UTF_8);
-			TcpHeader tcpHeader = new TcpHeader("CAS", "999", "0600", "300002", "", "B", "0", "0000", "20250825125130",
+			TcpHeader tcpHeader = new TcpHeader("CAS", "999", msgTypeCode, txTypeCode, "", "B", "0", "0000", "20250825125130",
 					"CAS912345678", bodyBuffer.readableBytes());
 			ByteBuf headerBuffer = tcpHeader.makeSendHeader();
 			ByteBuf sendBuffer = Unpooled.wrappedBuffer(headerBuffer, bodyBuffer);
@@ -67,8 +67,8 @@ public class TcpClient {
 			ByteBuf resBuffer = null;
 			resBuffer = asyncResponseQueue.poll(properties.getClientTimeoutSec(), TimeUnit.SECONDS);
 			if (resBuffer == null) {
-				log.error("No response message from Tcp server.");
-				return "Timeout Error : Tcp Server No Response";
+				log.error("Response timeout error");
+				return "No response message from Tcp server";
 			}
 
 			String receivedBodyMessage = resBuffer.toString(tcpHeader.getHeaderLength(),
