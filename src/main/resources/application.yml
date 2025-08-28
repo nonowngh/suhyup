@@ -2,10 +2,18 @@ server:
   port: 28000
 
 tcp:
-  suhyup-bank:
+  server:
+    enabled: true
+    bind-port: 9999
+  client:
     host: 127.0.0.1
     port: 5555
     client-timeout-sec: 10
+
+web:
+  app-service:
+    url: http://localhost:1080/suhyup/app-api
+
 
 interface:
   spec:

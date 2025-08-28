@@ -1,5 +1,17 @@
-{"properties": [{
-  "name": "interface.spec.enable-json-file",
-  "type": "java.lang.String",
-  "description": "A description for 'interface.spec.enable-json-file'"
-}]}
+{"properties": [
+  {
+    "name": "tcp.server.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'tcp.server.enabled'"
+  },
+  {
+    "name": "web.app-service.url",
+    "type": "java.lang.String",
+    "description": "A description for 'web.app-service.url'"
+  },
+  {
+    "name": "interface.spec.enable-json-file",
+    "type": "java.lang.String",
+    "description": "A description for 'interface.spec.enable-json-file'"
+  }
+]}

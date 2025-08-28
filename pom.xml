@@ -224,6 +224,12 @@
             <artifactId>opentelemetry-sdk</artifactId>
             <version>1.30.0</version>
         </dependency>
+        
+        <dependency>
+    <groupId>org.mock-server</groupId>
+    <artifactId>mockserver-netty</artifactId>
+    <version>5.15.0</version>
+</dependency>
     </dependencies>
 
 

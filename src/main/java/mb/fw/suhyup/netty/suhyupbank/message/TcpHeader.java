@@ -1,5 +1,8 @@
 package mb.fw.suhyup.netty.suhyupbank.message;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import mb.fw.suhyup.util.PaddingUtils;
@@ -20,7 +23,11 @@ public class TcpHeader {
 	private String filler; // 필러(19)
 	private int bodyLength; //전문 전체 길이(header + body)
 	
+	private ByteBuf headerBuffer;
+	
     public static final int HEADER_LENGTH = 74;
+    
+	private static Charset charsets = StandardCharsets.UTF_8;
 
 	public TcpHeader(String processType, String orgCode, String msgTypeCode, String txTypeCode, String statusCode,
 			String srFlag, String resultTypeCode, String resultCode, String sndTime, String msgNo, int bodyLength) {
@@ -35,6 +42,10 @@ public class TcpHeader {
 		this.sndTime = sndTime;
 		this.msgNo = msgNo;
 		this.bodyLength = bodyLength;
+	}
+	
+	public TcpHeader(ByteBuf totalBuffer) {
+		this.headerBuffer = totalBuffer.slice(0, HEADER_LENGTH);
 	}
 
 	public ByteBuf makeSendHeader() {
@@ -57,7 +68,8 @@ public class TcpHeader {
 	public int getHeaderLength() {
 		return HEADER_LENGTH;
 	}
-	
-	
 
+	public String getMsgTypeCode() {		
+		return headerBuffer.slice(10, 4).toString(charsets).trim();
+	}
 }

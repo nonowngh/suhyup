@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.extern.slf4j.Slf4j;
 import mb.fw.suhyup.dto.RequestMessage;
 import mb.fw.suhyup.dto.ResponseMessage;
-import mb.fw.suhyup.netty.suhyupbank.service.TcpClientService;
+import mb.fw.suhyup.service.TcpClientService;
 
 @RestController
 @RequestMapping("/esb/api")

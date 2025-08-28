@@ -1,4 +1,4 @@
-package mb.fw.suhyup.netty.suhyupbank.service;
+package mb.fw.suhyup.service;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
