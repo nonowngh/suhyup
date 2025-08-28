@@ -14,10 +14,13 @@ web:
   app-service:
     url: http://localhost:1080/suhyup/app-api
 
-
 interface:
   spec:
     enable-json-file: true
+
+mockserver:
+  enabled: true
+  port: 1080
 
 spring:
   autoconfigure:

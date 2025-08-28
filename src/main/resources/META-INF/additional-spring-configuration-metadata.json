@@ -13,5 +13,15 @@
     "name": "interface.spec.enable-json-file",
     "type": "java.lang.String",
     "description": "A description for 'interface.spec.enable-json-file'"
+  },
+  {
+    "name": "mockserver.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'mockserver.enabled'"
+  },
+  {
+    "name": "mockserver.port",
+    "type": "java.lang.String",
+    "description": "A description for 'mockserver.port'"
   }
 ]}
