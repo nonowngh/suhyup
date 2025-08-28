@@ -21,6 +21,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.util.CharsetUtil;
+import io.netty.util.ReferenceCountUtil;
 import lombok.extern.slf4j.Slf4j;
 import mb.fw.suhyup.configuration.NettyProperties;
 import mb.fw.suhyup.netty.suhyupbank.message.TcpHeader;
@@ -35,6 +36,7 @@ public class TcpClient {
 	public String sendMessage(String message, String msgTypeCode, String txTypeCode) throws Exception {
 		EventLoopGroup group = new NioEventLoopGroup();
 		Channel channel = null;
+		ByteBuf bodyBuffer;
 		try {
 			BlockingQueue<ByteBuf> asyncResponseQueue = new LinkedBlockingQueue<ByteBuf>();
 			Bootstrap bootstrap = new Bootstrap();
@@ -48,11 +50,10 @@ public class TcpClient {
 
 			ChannelFuture cf = bootstrap.connect(properties.getHost(), properties.getPort()).sync();
 
-			ByteBuf bodyBuffer = Unpooled.copiedBuffer(message, CharsetUtil.UTF_8);
+			bodyBuffer = Unpooled.copiedBuffer(message, CharsetUtil.UTF_8);
 			TcpHeader tcpHeader = new TcpHeader("CAS", "999", msgTypeCode, txTypeCode, "", "B", "0", "0000", "20250825125130",
 					"CAS912345678", bodyBuffer.readableBytes());
-			ByteBuf headerBuffer = tcpHeader.makeSendHeader();
-			ByteBuf sendBuffer = Unpooled.wrappedBuffer(headerBuffer, bodyBuffer);
+			ByteBuf sendBuffer = Unpooled.wrappedBuffer(tcpHeader.makeSendHeader(), Unpooled.copiedBuffer(message, CharsetUtil.UTF_8));
 			cf.addListener(new ChannelFutureListener() {
 				@Override
 				public void operationComplete(ChannelFuture future) throws Exception {
@@ -75,6 +76,9 @@ public class TcpClient {
 					resBuffer.readableBytes() - tcpHeader.getHeaderLength(), CharsetUtil.UTF_8);
 			log.info("Receive message from server: " + receivedBodyMessage);
 
+			ReferenceCountUtil.release(bodyBuffer);
+			ReferenceCountUtil.release(resBuffer);
+			
 			return receivedBodyMessage;
 		} finally {
 			if (channel != null && channel.isActive())
